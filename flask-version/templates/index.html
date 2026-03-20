@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- Prioridade máxima: preconnect antes de tudo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload da folha de fontes para eliminar FOUT -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>André Luiz | Portfólio Técnico</title>
+    <meta name="description" content="Portfólio técnico de Engenharia de Dados com foco em pipelines, processamento distribuído, bancos relacionais e backend em Python.">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
+    <!-- Carregamento assíncrono da fonte com display=swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS (build estático) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+</head>
+<body class="bg-[#000000] text-foreground font-sans antialiased overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#000000]/80 backdrop-blur-md border-b border-border">
+        <!-- CSS-only mobile menu (Checkbox Hack) -->
+        <input type="checkbox" id="menu-toggle" class="hidden peer">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-[1fr_auto_1fr] items-center h-16 lg:h-20">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-3 justify-self-start">
+                    <svg class="h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+                        <defs>
+                            <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <style>
+                            text { font-family: 'Consolas', 'Courier New', monospace; font-weight: bold; font-size: 90px; fill: currentColor; filter: url(#neon-glow); }
+                        </style>
+                        <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">&gt;_</text>
+                    </svg>
+                    <span class="text-xl font-bold font-display">André Luiz</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center justify-center gap-8">
+                    <a href="#inicio" class="touch-target inline-flex items-center text-sm font-medium hover:text-primary transition-colors">Início</a>
+                    <a href="#projetos" class="touch-target inline-flex items-center text-sm font-medium hover:text-primary transition-colors">Projetos</a>
+                    <a href="#sobre" class="touch-target inline-flex items-center text-sm font-medium hover:text-primary transition-colors">Sobre</a>
+                    <a href="#contato" class="touch-target inline-flex items-center text-sm font-medium hover:text-primary transition-colors">Contato</a>
+                </nav>
+
+                <div class="justify-self-end flex items-center gap-3">
+                    <!-- CTA Button -->
+                    <a href="https://github.com/de-andreluiz" target="_blank" rel="noopener noreferrer" title="Visitar meu perfil do GitHub" aria-label="Visitar meu perfil do GitHub" class="touch-target inline-flex items-center gap-2 bg-primary text-primary-foreground p-2 sm:px-6 sm:py-2 rounded-lg font-medium text-xs sm:text-sm hover:bg-primary/90 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.793 23.385c.6.111.82-.261.82-.58 0-.287-.011-1.047-.017-2.055-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.334-1.756-1.334-1.756-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.775.419-1.305.762-1.605-2.665-.303-5.467-1.333-5.467-5.931 0-1.311.469-2.382 1.236-3.221-.124-.303-.536-1.523.117-3.176 0 0 1.008-.323 3.301 1.23a11.5 11.5 0 016.006 0c2.291-1.553 3.297-1.23 3.297-1.23.655 1.653.243 2.873.119 3.176.769.839 1.235 1.91 1.235 3.221 0 4.61-2.807 5.625-5.48 5.921.431.372.815 1.103.815 2.222 0 1.604-.015 2.896-.015 3.289 0 .322.216.697.825.579A12.001 12.001 0 0012 .5z"/></svg>
+                        <span class="hidden sm:inline">Confira meus repositórios</span>
+                    </a>
+
+                    <!-- Mobile Menu Button (CSS-only via checkbox) -->
+                    <label for="menu-toggle" class="cursor-pointer block md:hidden p-2" aria-label="Abrir menu">
+                        <!-- Heroicons: bars-3 -->
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="absolute top-full left-0 w-full bg-[#000000] z-50 transition-all duration-300 ease-in-out max-h-0 overflow-hidden md:hidden peer-checked:max-h-96 peer-checked:border-t peer-checked:border-neon-green/30 border-t border-transparent">
+            <nav class="container mx-auto px-4 py-4 flex flex-col gap-4">
+                <a href="#inicio" class="touch-target flex items-center text-sm font-medium hover:text-primary transition-colors">Início</a>
+                <a href="#projetos" class="touch-target flex items-center text-sm font-medium hover:text-primary transition-colors">Projetos</a>
+                <a href="#sobre" class="touch-target flex items-center text-sm font-medium hover:text-primary transition-colors">Sobre</a>
+                <a href="#contato" class="touch-target flex items-center text-sm font-medium hover:text-primary transition-colors">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center relative pt-28 lg:pt-32">
+        <!-- Background gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent hero-parallax"></div>
+        
+        <div class="container mx-auto px-4 lg:px-8 relative z-10">
+            <div class="max-w-4xl mx-auto reveal flex flex-col items-center justify-center text-center">
+                <span class="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+                    Engenheiro de Dados
+                </span>
+                
+                <h1 class="text-[clamp(2rem,7vw,4.5rem)] font-bold font-display leading-tight mb-6">
+                    Construindo arquiteturas de dados, integrações complexas e aplicações web escaláveis.
+                </h1>
+                
+                <p class="text-[clamp(1rem,2.8vw,1.25rem)] text-muted-foreground max-w-2xl mx-auto mb-6">
+                    Transformo regras de negócio em infraestruturas automatizadas e seguras. Especialista em orquestração com Apache Airflow, pipelines ETL em Python e desenvolvimento de aplicações com Flask, focando em performance e confiabilidade.
+                </p>
+                
+                <div class="flex w-full flex-col items-center justify-center sm:flex-row gap-4">
+                    <a href="#projetos" class="premium-btn touch-target inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                        Ver meus projetos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Stats Section -->
+    <section class="hidden py-16 bg-secondary/30">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-primary font-display mb-2">3+</div>
+                    <div class="text-sm text-muted-foreground">Anos de Experiência em TI</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-primary font-display mb-2">500+</div>
+                    <div class="text-sm text-muted-foreground">Pipelines entregues</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-primary font-display mb-2">100+</div>
+                    <div class="text-sm text-muted-foreground">Fluxos automatizados</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-primary font-display mb-2">98%</div>
+                    <div class="text-sm text-muted-foreground">SLA de disponibilidade</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="hidden py-20 lg:py-32 bg-secondary/20">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sm text-primary font-medium mb-4 block">Especialidades</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-6">
+                    Atuação em engenharia de dados ponta a ponta
+                </h2>
+                <p class="text-muted-foreground text-lg">
+                    Da orquestração ao consumo analítico: soluções técnicas para ambientes de dados modernos.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Service Card 1 -->
+                <div class="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Pipelines de Dados</h3>
+                    <p class="text-muted-foreground mb-4">Construção de pipelines confiáveis para ingestão, transformação e entrega de dados.</p>
+                    <a href="https://github.com/de-andreluiz/airflow-orchestration" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                        Saiba mais
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Modelagem e SQL</h3>
+                    <p class="text-muted-foreground mb-4">Modelagem relacional e consultas complexas com foco em desempenho e consistência.</p>
+                    <a href="https://github.com/de-andreluiz/api-integration-pipeline" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                        Saiba mais
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Processamento Distribuído</h3>
+                    <p class="text-muted-foreground mb-4">Processamento em larga escala para cargas batch e streaming com arquitetura escalável.</p>
+                    <a href="https://github.com/de-andreluiz/etl-api-hr" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                        Saiba mais
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Integração de Dados</h3>
+                    <p class="text-muted-foreground mb-4">ETL e integração entre múltiplas fontes para consolidar dados com qualidade.</p>
+                    <a href="https://github.com/de-andreluiz/secure-dashboard-portal" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                        Saiba mais
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Integração de Dados</h3>
+                    <p class="text-muted-foreground mb-4">APIs e serviços em Python para expor dados com segurança e governança.</p>
+                    <a href="https://github.com/de-andreluiz/marketing-data-automation" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                        Saiba mais
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors group">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Observabilidade</h3>
+                    <p class="text-muted-foreground mb-4">Monitoramento, alertas e rastreabilidade para manter alta disponibilidade da plataforma.</p>
+                    <a href="#projetos" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                        Saiba mais
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="hidden py-20 lg:py-32 bg-gradient-to-r from-primary/10 to-primary/5">
+        <div class="container mx-auto px-4 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-6">
+                Construindo arquiteturas de dados sólidas e escaláveis
+            </h2>
+            <p class="text-muted-foreground text-lg max-w-2xl mx-auto mb-10">
+                Transformo dados brutos em soluções estratégicas para otimizar performance, reduzir gargalos e acelerar decisões orientadas por dados.
+            </p>
+            <a href="#projetos" class="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2m-9 4h10M8 11v8m8-8v8M6 21h12a2 2 0 002-2V7H4v12a2 2 0 002 2z"></path></svg>
+                Ver meus projetos
+            </a>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="projetos" class="py-10 lg:py-16 reveal bg-[#000000]">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10 flex flex-col items-center justify-center">
+                <span class="text-sm text-primary font-medium mb-4 block">Portfólio Técnico</span>
+                <h2 class="text-[clamp(1.75rem,5vw,3rem)] font-bold font-display mb-6">
+                    Projetos e Atuação
+                </h2>
+                <p class="text-muted-foreground text-lg">
+                    Casos e frentes técnicas com foco em engenharia de dados, performance e confiabilidade.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 w-full max-w-7xl mx-auto">
+                <!-- Portfolio Item 1 -->
+                <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                    <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
+                        <img src="{{ url_for('static', filename='img/pipelines-python.png') if url_for else 'static/img/pipelines-python.png' }}" alt="ETL API HR — ingestão de dados via APIs" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col min-h-0">
+                        <span class="text-xs text-primary font-medium">Ingestão de Dados</span>
+                        <h3 class="text-lg font-bold font-display mt-1">ETL API HR</h3>
+                        <p class="text-sm text-muted-foreground mt-2 flex-1 min-h-0">Pipeline ETL orientado a APIs REST para dados de RH: ingestão incremental, normalização e carga em warehouse relacional (SQL Server), com lotes resilientes, tratamento de falhas e rastreio das execuções.</p>
+                        <a href="https://github.com/de-andreluiz/etl-api-hr" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">Ver repositório</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2 -->
+                <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                    <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
+                        <img src="{{ url_for('static', filename='img/apache-airflow-spark.png') if url_for else 'static/img/apache-airflow-spark.png' }}" alt="Airflow Orchestration — DAGs e Apache Hop" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col min-h-0">
+                        <span class="text-xs text-primary font-medium">Orquestração & DataOps</span>
+                        <h3 class="text-lg font-bold font-display mt-1">Airflow Orchestration</h3>
+                        <p class="text-sm text-muted-foreground mt-2 flex-1 min-h-0">Orquestração com Apache Airflow: DAGs que coordenam pipelines Apache Hop, jobs Python e processamento em Spark, com dependências explícitas, retries, alertas e práticas de DataOps para ambiente corporativo.</p>
+                        <a href="https://github.com/de-andreluiz/airflow-orchestration" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">Ver repositório</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3 -->
+                <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                    <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
+                        <img src="{{ url_for('static', filename='img/marketing-data-automation.png') if url_for else 'static/img/marketing-data-automation.png' }}" alt="Marketing Data Automation — Flask e automação" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col min-h-0">
+                        <span class="text-xs text-primary font-medium">Automação & Flask</span>
+                        <h3 class="text-lg font-bold font-display mt-1">Marketing Data Automation</h3>
+                        <p class="text-sm text-muted-foreground mt-2 flex-1 min-h-0">Automação de processos de marketing e manipulação de arquivos em rede (SMB) através de uma aplicação web estruturada em Flask.</p>
+                        <a href="https://github.com/de-andreluiz/marketing-data-automation" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">Ver repositório</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4 -->
+                <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                    <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
+                        <img src="{{ url_for('static', filename='img/secure-dashboard-portal.png') if url_for else 'static/img/secure-dashboard-portal.png' }}" alt="Secure Dashboard Portal — dashboards e acesso seguro" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col min-h-0">
+                        <span class="text-xs text-primary font-medium">Segurança & Governança</span>
+                        <h3 class="text-lg font-bold font-display mt-1">Secure Dashboard Portal</h3>
+                        <p class="text-sm text-muted-foreground mt-2 flex-1 min-h-0">Portal para consumo de dashboards com autenticação, autorização por perfil, sessão segura e camadas de proteção pensadas para governança do acesso analítico no dia a dia.</p>
+                        <a href="https://github.com/de-andreluiz/secure-dashboard-portal" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">Ver repositório</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5 -->
+                <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                    <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
+                        <img src="{{ url_for('static', filename='img/api-integration-pipeline.png') if url_for else 'static/img/api-integration-pipeline.png' }}" alt="API Integration Pipeline — integração SaaS para data warehouse" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col min-h-0">
+                        <span class="text-xs text-primary font-medium">Integração de Sistemas</span>
+                        <h3 class="text-lg font-bold font-display mt-1">API Integration Pipeline</h3>
+                        <p class="text-sm text-muted-foreground mt-2 flex-1 min-h-0">Pipelines de integração API-first: extração de fontes SaaS e corporativas, transformação e carga em DW relacional, com contratos de dados, idempotência onde aplicável e rastreabilidade entre origem e destino.</p>
+                        <a href="https://github.com/de-andreluiz/api-integration-pipeline" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">Ver repositório</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-10 lg:py-16 reveal">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div>
+                    <span class="text-sm text-primary font-medium mb-4 block">Sobre Mim</span>
+                    <h2 class="text-[clamp(1.75rem,5vw,3rem)] font-bold font-display mb-6">
+                        Sistemas, Dados e Segurança na Prática
+                    </h2>
+                    <p class="text-muted-foreground mb-6 text-lg">
+                        Sou um profissional de tecnologia focado em dados e automação, atualmente cursando Análise e Desenvolvimento de Sistemas na UNIFOR.
+                    </p>
+                    <p class="text-muted-foreground mb-8">
+                        Minha evolução foi da sustentação de ERPs (TOTVS) para a arquitetura de integrações do zero, sempre com atenção a código limpo, organização das entregas e proteção das aplicações com boas práticas de segurança.
+                    </p>
+                    
+                    <div class="grid sm:grid-cols-3 gap-6 mb-8">
+                        <div class="flex flex-col items-center text-center p-4 bg-card rounded-xl border border-border">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                            </div>
+                            <span class="font-medium text-sm">Escalabilidade</span>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-4 bg-card rounded-xl border border-border">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            </div>
+                            <span class="font-medium text-sm">Confiabilidade</span>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-4 bg-card rounded-xl border border-border">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            </div>
+                            <span class="font-medium text-sm">Performance</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="text-xs px-3 py-1 rounded-full border border-border/70 bg-background/40 text-muted-foreground">Python</span>
+                        <span class="text-xs px-3 py-1 rounded-full border border-border/70 bg-background/40 text-muted-foreground">Apache Airflow</span>
+                        <span class="text-xs px-3 py-1 rounded-full border border-border/70 bg-background/40 text-muted-foreground">SQL Server</span>
+                        <span class="text-xs px-3 py-1 rounded-full border border-border/70 bg-background/40 text-muted-foreground">Flask</span>
+                        <span class="text-xs px-3 py-1 rounded-full border border-border/70 bg-background/40 text-muted-foreground">Docker</span>
+                    </div>
+
+                    <a href="#projetos" class="inline-flex items-center gap-2 text-primary font-medium hover:underline">
+                        Ver experiência
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="relative">
+                    <div class="relative aspect-square bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-black/50"></div>
+                        <div class="relative z-10 text-center text-4xl md:text-5xl lg:text-6xl font-bold text-primary/90 font-display px-6">
+                            3+ Anos de Experiência em TI
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-card border border-border rounded-xl p-4 shadow-xl">
+                        <div class="text-2xl font-bold text-primary font-display">Zero-to-One</div>
+                        <div class="text-sm text-muted-foreground">Construção de infraestruturas de dados do zero à produção.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="tecnologias" class="hidden py-20 lg:py-32 bg-secondary/20">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sm text-primary font-medium mb-4 block">Stack Técnica</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-6">
+                    Ferramentas e Tecnologias
+                </h2>
+                <p class="text-muted-foreground text-lg">
+                    Principais tecnologias que utilizo para construir soluções de dados em produção.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Blog Post 1 -->
+                <article class="bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-colors">
+                    <div class="aspect-video bg-gradient-to-br from-primary/20 to-primary/5"></div>
+                    <div class="p-6">
+                        <span class="text-xs text-primary font-medium">Engenharia e Big Data</span>
+                        <h3 class="text-lg font-bold font-display mt-2 mb-3">Airflow, Apache Hop, Pentaho e pipelines distribuídos</h3>
+                        <p class="text-sm text-muted-foreground mb-4">Orquestração, processamento em escala e integração para ambientes de dados robustos.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                            Ver detalhes
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-colors">
+                    <div class="aspect-video bg-gradient-to-br from-primary/20 to-primary/5"></div>
+                    <div class="p-6">
+                        <span class="text-xs text-primary font-medium">Bancos de Dados</span>
+                        <h3 class="text-lg font-bold font-display mt-2 mb-3">Oracle e SQL para modelagem e alta performance</h3>
+                        <p class="text-sm text-muted-foreground mb-4">Estruturas relacionais, tuning de query e estratégias para consistência e velocidade.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                            Ver detalhes
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-colors">
+                    <div class="aspect-video bg-gradient-to-br from-primary/20 to-primary/5"></div>
+                    <div class="p-6">
+                        <span class="text-xs text-primary font-medium">Linguagens e Frameworks</span>
+                        <h3 class="text-lg font-bold font-display mt-2 mb-3">Python e Flask para APIs e automações de dados</h3>
+                        <p class="text-sm text-muted-foreground mb-4">Desenvolvimento backend para integrações, serviços e produtos orientados por dados.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-primary font-medium text-sm hover:underline">
+                            Ver detalhes
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-10 lg:py-14 bg-secondary/20 reveal">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="text-sm text-primary font-medium mb-3 block">Contato</span>
+                <h2 class="text-[clamp(1.75rem,5vw,2.5rem)] font-bold font-display mb-4">Vamos conversar?</h2>
+                <p class="text-muted-foreground mb-8">
+                    Disponível para oportunidades em Engenharia de Dados, com foco em integração, segurança e performance.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="mailto:ux.andreluiz@gmail.com" class="premium-btn touch-target inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
+                        Enviar e-mail
+                    </a>
+                    <a href="https://www.linkedin.com/in/de-andreluiz" target="_blank" rel="noopener noreferrer" class="premium-btn touch-target inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border font-medium hover:bg-secondary transition-colors">
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-card border-t border-border py-12 reveal">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Logo & Description -->
+                <div class="lg:col-span-1">
+                    <a href="/" class="flex items-center gap-3 mb-4">
+                        <svg class="h-8 w-8 text-primary shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+                            <defs>
+                                <filter id="neon-glow-footer" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <style>
+                                text { font-family: 'Consolas', 'Courier New', monospace; font-weight: bold; font-size: 90px; fill: currentColor; filter: url(#neon-glow-footer); }
+                            </style>
+                            <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">&gt;_</text>
+                        </svg>
+                        <span class="text-xl font-bold font-display">André Luiz</span>
+                    </a>
+                    <p class="text-muted-foreground text-sm mb-4">
+                        Engenharia de dados para transformar informação em decisões de alto impacto.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/de-andreluiz" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors" title="GitHub">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5a12 12 0 00-3.793 23.385c.6.111.82-.261.82-.58 0-.287-.011-1.047-.017-2.055-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.334-1.756-1.334-1.756-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.775.419-1.305.762-1.605-2.665-.303-5.467-1.333-5.467-5.931 0-1.311.469-2.382 1.236-3.221-.124-.303-.536-1.523.117-3.176 0 0 1.008-.323 3.301 1.23a11.5 11.5 0 016.006 0c2.291-1.553 3.297-1.23 3.297-1.23.655 1.653.243 2.873.119 3.176.769.839 1.235 1.91 1.235 3.221 0 4.61-2.807 5.625-5.48 5.921.431.372.815 1.103.815 2.222 0 1.604-.015 2.896-.015 3.289 0 .322.216.697.825.579A12.001 12.001 0 0012 .5z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/de-andreluiz" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors" title="LinkedIn">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/nsx.andre/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors" title="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-bold font-display mb-4 text-primary">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="text-muted-foreground hover:text-primary transition-colors text-sm">Início</a></li>
+                        <li><a href="#projetos" class="text-muted-foreground hover:text-primary transition-colors text-sm">Projetos</a></li>
+                        <li><a href="#sobre" class="text-muted-foreground hover:text-primary transition-colors text-sm">Sobre</a></li>
+                        <li><a href="#contato" class="text-muted-foreground hover:text-primary transition-colors text-sm">Contato</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="font-bold font-display mb-4 text-primary">Recursos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/curriculo.pdf" class="text-muted-foreground hover:text-primary transition-colors text-sm">Baixar Currículo (PDF)</a></li>
+                        <li><a href="https://github.com/de-andreluiz" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-primary transition-colors text-sm">Código fonte do portfólio</a></li>
+                    </ul>
+                </div>
+
+                <!-- Professional -->
+                <div>
+                    <h3 class="font-bold font-display mb-4 text-primary">Status</h3>
+                    <ul class="space-y-2">
+                        <li class="text-muted-foreground text-sm">📍 Eusébio, Ceará, Brasil</li>
+                        <li class="text-muted-foreground text-sm">💻 Atuação Remota</li>
+                        <li class="text-muted-foreground text-sm">⚙️ Python | SQL | Airflow</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-muted-foreground text-sm">
+                    &copy; 2026 André. Portfólio técnico de Engenharia de Dados.
+                </p>
+                <div></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal on scroll
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+        // Subtle hero parallax
+        const heroParallaxTarget = document.getElementById('inicio');
+        const parallaxLayer = heroParallaxTarget ? heroParallaxTarget.querySelector('.hero-parallax') : null;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (heroParallaxTarget && parallaxLayer && !reduceMotion) {
+            heroParallaxTarget.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 8;
+                const y = (e.clientY / window.innerHeight - 0.5) * 8;
+                parallaxLayer.style.transform = `translate(${x}px, ${y}px)`;
+            });
+            heroParallaxTarget.addEventListener('mouseleave', () => {
+                parallaxLayer.style.transform = 'translate(0, 0)';
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

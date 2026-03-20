@@ -1,0 +1,16 @@
+{
+  "name": "portfolio-andre-luiz",
+  "version": "1.0.0",
+  "description": "Portfólio Profissional de Engenharia de Dados - André Luiz",
+  "scripts": {
+    "build": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --minify",
+    "watch": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "André Luiz",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
+}

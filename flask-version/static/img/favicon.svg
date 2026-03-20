@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    text { font-family: 'Courier New', monospace; font-weight: bold; font-size: 80px; fill: #14FF00; }
+  </style>
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">&gt;_</text>
+</svg>
