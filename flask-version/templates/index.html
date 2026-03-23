@@ -81,6 +81,7 @@
         </div>
     </header>
 
+    <main>
     <!-- Hero Section -->
     <section id="inicio" class="min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center relative pt-28 lg:pt-32">
         <!-- Background gradient -->
@@ -262,7 +263,7 @@
                 <!-- Portfolio Item 1 -->
                 <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                     <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
-                        <img src="{{ url_for('static', filename='img/pipelines-python.png') if url_for else 'static/img/pipelines-python.png' }}" alt="ETL API HR — ingestão de dados via APIs" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                        <img src="{{ url_for('static', filename='img/pipelines-python.png') if url_for else 'static/img/pipelines-python.png' }}" alt="ETL API HR — ingestão de dados via APIs" width="800" height="600" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
                     </div>
                     <div class="p-6 flex-1 flex flex-col min-h-0">
                         <span class="text-xs text-primary font-medium">Ingestão de Dados</span>
@@ -275,7 +276,7 @@
                 <!-- Portfolio Item 2 -->
                 <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                     <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
-                        <img src="{{ url_for('static', filename='img/apache-airflow-spark.png') if url_for else 'static/img/apache-airflow-spark.png' }}" alt="Airflow Orchestration — DAGs e Apache Hop" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                        <img src="{{ url_for('static', filename='img/apache-airflow-spark.png') if url_for else 'static/img/apache-airflow-spark.png' }}" alt="Airflow Orchestration — DAGs e Apache Hop" width="800" height="600" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
                     </div>
                     <div class="p-6 flex-1 flex flex-col min-h-0">
                         <span class="text-xs text-primary font-medium">Orquestração & DataOps</span>
@@ -288,7 +289,7 @@
                 <!-- Portfolio Item 3 -->
                 <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                     <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
-                        <img src="{{ url_for('static', filename='img/marketing-data-automation.png') if url_for else 'static/img/marketing-data-automation.png' }}" alt="Marketing Data Automation — Flask e automação" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                        <img src="{{ url_for('static', filename='img/marketing-data-automation.png') if url_for else 'static/img/marketing-data-automation.png' }}" alt="Marketing Data Automation — Flask e automação" width="800" height="600" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
                     </div>
                     <div class="p-6 flex-1 flex flex-col min-h-0">
                         <span class="text-xs text-primary font-medium">Automação & Flask</span>
@@ -301,7 +302,7 @@
                 <!-- Portfolio Item 4 -->
                 <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                     <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
-                        <img src="{{ url_for('static', filename='img/secure-dashboard-portal.png') if url_for else 'static/img/secure-dashboard-portal.png' }}" alt="Secure Dashboard Portal — dashboards e acesso seguro" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                        <img src="{{ url_for('static', filename='img/secure-dashboard-portal.png') if url_for else 'static/img/secure-dashboard-portal.png' }}" alt="Secure Dashboard Portal — dashboards e acesso seguro" width="800" height="600" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
                     </div>
                     <div class="p-6 flex-1 flex flex-col min-h-0">
                         <span class="text-xs text-primary font-medium">Segurança & Governança</span>
@@ -314,7 +315,7 @@
                 <!-- Portfolio Item 5 -->
                 <div class="group premium-card relative overflow-hidden rounded-2xl bg-[#000000] border border-border flex flex-col h-[500px] w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                     <div class="relative overflow-hidden h-64 w-full shrink-0 bg-[#000000] flex items-center justify-center">
-                        <img src="{{ url_for('static', filename='img/api-integration-pipeline.png') if url_for else 'static/img/api-integration-pipeline.png' }}" alt="API Integration Pipeline — integração SaaS para data warehouse" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
+                        <img src="{{ url_for('static', filename='img/api-integration-pipeline.png') if url_for else 'static/img/api-integration-pipeline.png' }}" alt="API Integration Pipeline — integração SaaS para data warehouse" width="800" height="600" class="w-full h-full object-contain object-center" loading="lazy" decoding="async">
                     </div>
                     <div class="p-6 flex-1 flex flex-col min-h-0">
                         <span class="text-xs text-primary font-medium">Integração de Sistemas</span>
@@ -474,6 +475,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer class="bg-card border-t border-border py-12 reveal">
         <div class="container mx-auto px-4 lg:px-8">
@@ -518,10 +521,10 @@
                 <div>
                     <h3 class="font-bold font-display mb-4 text-primary">Links Rápidos</h3>
                     <ul class="space-y-2">
-                        <li><a href="#inicio" class="text-muted-foreground hover:text-primary transition-colors text-sm">Início</a></li>
-                        <li><a href="#projetos" class="text-muted-foreground hover:text-primary transition-colors text-sm">Projetos</a></li>
-                        <li><a href="#sobre" class="text-muted-foreground hover:text-primary transition-colors text-sm">Sobre</a></li>
-                        <li><a href="#contato" class="text-muted-foreground hover:text-primary transition-colors text-sm">Contato</a></li>
+                        <li><a href="#inicio" class="text-muted-foreground hover:text-primary transition-colors text-sm" aria-label="Ir para a seção Início pelo rodapé">Início</a></li>
+                        <li><a href="#projetos" class="text-muted-foreground hover:text-primary transition-colors text-sm" aria-label="Ir para a seção Projetos pelo rodapé">Projetos</a></li>
+                        <li><a href="#sobre" class="text-muted-foreground hover:text-primary transition-colors text-sm" aria-label="Ir para a seção Sobre pelo rodapé">Sobre</a></li>
+                        <li><a href="#contato" class="text-muted-foreground hover:text-primary transition-colors text-sm" aria-label="Ir para a seção Contato pelo rodapé">Contato</a></li>
                     </ul>
                 </div>
 
