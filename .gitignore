@@ -14,6 +14,7 @@ yarn-error.log*
 # =========================
 venv/
 env/
+.venv_run/
 __pycache__/
 *.pyc
 *.pyo

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andre-luiz-dados.vercel.app/sitemap.xml
